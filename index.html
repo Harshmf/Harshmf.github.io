@@ -1,35 +1,941 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Profile</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; max-width: 680px; margin: 40px auto; padding: 0 20px; color: #222; }
-        h1 { margin-bottom: 4px; }
-        .tagline { color: #666; font-size: 1.1rem; margin-top: 0; }
-        .card { background: #f7f8fa; border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; margin: 24px 0; }
-        a { color: #0969da; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        footer { margin-top: 48px; font-size: 0.9rem; color: #777; border-top: 1px solid #eee; padding-top: 16px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harsh Vardhan — Hardware, Embedded & Operations Engineer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary':    '#0B0F17',
+            'bg-secondary':  '#111827',
+            'card-dark':     '#0D1117',
+            'card-surface':  '#161B27',
+            'border-dark':   '#1E2D3D',
+            'border-mid':    '#1F2937',
+            'emerald-acc':   '#10B981',
+            'emerald-lit':   '#34D399',
+            'cyan-acc':      '#06B6D4',
+            'cyan-lit':      '#22D3EE',
+            'amber-acc':     '#F59E0B',
+            'amber-lit':     '#FCD34D',
+            'text-primary':  '#E2E8F0',
+            'text-muted':    '#64748B',
+            'text-soft':     '#94A3B8',
+            'text-mono':     '#A3E635',
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          keyframes: {
+            pulse_glow: {
+              '0%, 100%': { opacity: '1', boxShadow: '0 0 6px #10B981' },
+              '50%':       { opacity: '0.5', boxShadow: '0 0 18px #10B981' },
+            },
+            glitch_clip1: {
+              '0%':   { clipPath: 'inset(40% 0 60% 0)', transform: 'translate(-3px, 0)' },
+              '20%':  { clipPath: 'inset(10% 0 80% 0)', transform: 'translate(3px, 0)' },
+              '40%':  { clipPath: 'inset(70% 0 20% 0)', transform: 'translate(-2px, 0)' },
+              '60%':  { clipPath: 'inset(20% 0 55% 0)', transform: 'translate(2px, 0)' },
+              '80%':  { clipPath: 'inset(55% 0 30% 0)', transform: 'translate(-1px, 0)' },
+              '100%': { clipPath: 'inset(40% 0 60% 0)', transform: 'translate(0, 0)' },
+            },
+            glitch_clip2: {
+              '0%':   { clipPath: 'inset(60% 0 10% 0)', transform: 'translate(3px, 0)' },
+              '25%':  { clipPath: 'inset(30% 0 50% 0)', transform: 'translate(-3px, 0)' },
+              '50%':  { clipPath: 'inset(5%  0 85% 0)', transform: 'translate(2px, 0)' },
+              '75%':  { clipPath: 'inset(80% 0 5%  0)', transform: 'translate(-2px, 0)' },
+              '100%': { clipPath: 'inset(60% 0 10% 0)', transform: 'translate(0, 0)' },
+            },
+            slide_in_up: {
+              '0%':   { transform: 'translateY(100%)', opacity: '0' },
+              '100%': { transform: 'translateY(0)',    opacity: '1' },
+            },
+            slide_out_down: {
+              '0%':   { transform: 'translateY(0)',    opacity: '1' },
+              '100%': { transform: 'translateY(100%)', opacity: '0' },
+            },
+            scan_line: {
+              '0%':   { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(100vh)' },
+            },
+          },
+          animation: {
+            pulse_glow:    'pulse_glow 2s ease-in-out infinite',
+            slide_in_up:   'slide_in_up 0.3s ease-out forwards',
+            slide_out_down:'slide_out_down 0.3s ease-in forwards',
+            scan_line:     'scan_line 8s linear infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ── Blueprint Grid Background ──────────────────────────────── */
+    body {
+      background-color: #0B0F17;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cpattern id='minor' x='0' y='0' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='%231E2D3D' stroke-width='0.4' opacity='0.5'/%3E%3C/pattern%3E%3Cpattern id='major' x='0' y='0' width='200' height='200' patternUnits='userSpaceOnUse'%3E%3Crect width='200' height='200' fill='url(%23minor)'/%3E%3Cpath d='M 200 0 L 0 0 0 200' fill='none' stroke='%231E2D3D' stroke-width='1' opacity='0.8'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23major)'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+      background-repeat: repeat;
+      font-family: 'Inter', sans-serif;
+      color: #E2E8F0;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ───────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0B0F17; }
+    ::-webkit-scrollbar-thumb { background: #1E2D3D; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06B6D4; }
+
+    /* ── Glitch Text Effect ──────────────────────────────────────── */
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: transparent;
+    }
+    .glitch-text:hover::before {
+      color: #06B6D4;
+      animation: glitch_clip1 0.4s steps(1) infinite;
+    }
+    .glitch-text:hover::after {
+      color: #10B981;
+      animation: glitch_clip2 0.4s steps(1) infinite;
+    }
+
+    /* ── Status Pulse Dot ────────────────────────────────────────── */
+    .pulse-dot {
+      width: 10px; height: 10px;
+      background: #10B981;
+      border-radius: 50%;
+      animation: pulse_glow 2s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    /* ── Drawer Transition ───────────────────────────────────────── */
+    .drawer-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .drawer-content.open {
+      max-height: 600px;
+    }
+
+    /* ── Intersection Observer Animations ────────────────────────── */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Terminal Card ───────────────────────────────────────────── */
+    .terminal-card {
+      background: #0D1117;
+      border: 1px solid #1E2D3D;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Scan Line Overlay ───────────────────────────────────────── */
+    .scan-line-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(to bottom, transparent, rgba(6,182,212,0.08), transparent);
+      pointer-events: none;
+      z-index: 9999;
+      animation: scan_line 8s linear infinite;
+    }
+
+    /* ── Button hover glow ───────────────────────────────────────── */
+    .btn-emerald {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-emerald:hover {
+      box-shadow: 0 0 20px rgba(16,185,129,0.4);
+    }
+    .btn-cyan {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-cyan:hover {
+      box-shadow: 0 0 20px rgba(6,182,212,0.4);
+    }
+
+    /* ── Tag Badge ───────────────────────────────────────────────── */
+    .tag-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid;
+      display: inline-block;
+    }
+
+    /* ── Toast ───────────────────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: #161B27;
+      border: 1px solid #10B981;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #34D399;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slide_in_up 0.3s ease-out forwards;
+      box-shadow: 0 0 20px rgba(16,185,129,0.2);
+    }
+    .toast.hiding {
+      animation: slide_out_down 0.3s ease-in forwards;
+    }
+
+    /* ── Section Heading Accent ──────────────────────────────────── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: #64748B;
+    }
+
+    /* ── Card hover lift ─────────────────────────────────────────── */
+    .project-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    /* ── Workbench row ───────────────────────────────────────────── */
+    .workbench-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #1E2D3D;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+    .workbench-row:last-child {
+      border-bottom: none;
+    }
+  </style>
 </head>
-<body>
-    <h1>Your Name / Studio Name</h1>
-    <p class="tagline">Android Utilities & System Tools</p>
 
-    <div class="card">
-        <h3>About</h3>
-        <p>Independent developer building lightweight, purposeful Android tools focused on performance, privacy, and device-level efficiency.</p>
+<body class="min-h-screen">
+
+  <!-- Scan line overlay -->
+  <div class="scan-line-overlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HEADER / HERO SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <header class="relative min-h-screen flex flex-col justify-center px-6 md:px-16 lg:px-24 py-20">
+
+    <!-- Top status bar -->
+    <div class="mb-10 fade-in-up" style="transition-delay:0s">
+      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-emerald-acc/30 bg-card-dark/80 backdrop-blur-sm">
+        <span class="pulse-dot"></span>
+        <span class="font-mono text-xs text-emerald-lit tracking-widest">ALL_SYSTEMS_OPERATIONAL</span>
+        <span class="text-border-dark font-mono text-xs">//</span>
+        <span class="font-mono text-xs text-text-muted tracking-widest">READY_FOR_DEPLOYMENT</span>
+      </div>
     </div>
 
-    <div class="card">
-        <h3>Published Apps</h3>
-        <p>Check out our applications on <a href="https://play.google.com/store/apps/dev?id=YOUR_DEV_ID" target="_blank">Google Play</a>.</p>
+    <!-- Name -->
+    <div class="mb-4 fade-in-up" style="transition-delay:0.1s">
+      <h1
+        class="glitch-text font-mono font-bold text-text-primary leading-none tracking-tight"
+        data-text="HARSH VARDHAN"
+        style="font-size: clamp(2.5rem, 8vw, 6rem);"
+      >
+        HARSH VARDHAN
+      </h1>
     </div>
 
-    <footer>
-        <p>Contact: <a href="mailto:your-email@example.com">your-email@example.com</a> | <a href="/privacy.html">Privacy Policy</a></p>
-    </footer>
+    <!-- Tagline -->
+    <div class="mb-10 fade-in-up" style="transition-delay:0.2s">
+      <p class="font-sans text-lg md:text-xl text-text-soft font-light tracking-wide">
+        Hardware, Embedded Systems &amp; Operations Engineer
+      </p>
+    </div>
+
+    <!-- Telemetry Bar -->
+    <div class="mb-12 fade-in-up" style="transition-delay:0.3s">
+      <div class="terminal-card max-w-2xl border-l-4 border-l-cyan-acc p-5 md:p-6">
+        <div class="grid grid-cols-1 gap-3">
+          <!-- Row -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+            <span class="font-mono text-xs text-text-muted w-32 shrink-0">TARGET_STACK</span>
+            <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
+            <span class="font-mono text-xs text-text-mono">ESP32-S3 / C++ / BLE / Linux / Homelab</span>
+          </div>
+          <div class="border-b border-border-dark/50"></div>
+          <!-- Row -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+            <span class="font-mono text-xs text-text-muted w-32 shrink-0">LOCATION</span>
+            <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
+            <span class="font-mono text-xs text-text-primary">India <span class="text-text-muted">// UTC+5:30</span></span>
+          </div>
+          <div class="border-b border-border-dark/50"></div>
+          <!-- Row -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+            <span class="font-mono text-xs text-text-muted w-32 shrink-0">AVAILABILITY</span>
+            <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
+            <span class="font-mono text-xs text-emerald-lit">Open to Contracts &amp; Collaboration</span>
+          </div>
+          <div class="border-b border-border-dark/50"></div>
+          <!-- Row -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+            <span class="font-mono text-xs text-text-muted w-32 shrink-0">SYS_UPTIME</span>
+            <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
+            <span class="font-mono text-xs text-cyan-lit" id="uptime-display">00:00:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 fade-in-up" style="transition-delay:0.4s">
+      <a
+        href="#projects"
+        class="btn-emerald inline-flex items-center gap-2 px-6 py-3 rounded border border-emerald-acc text-emerald-lit font-mono text-sm tracking-wider hover:bg-emerald-acc/10 transition-all"
+      >
+        <span class="text-emerald-acc">&gt;</span>
+        INSPECT_BUILDS
+        <span class="text-text-muted">↓</span>
+      </a>
+      <a
+        href="#contact"
+        class="btn-cyan inline-flex items-center gap-2 px-6 py-3 rounded border border-cyan-acc text-cyan-lit font-mono text-sm tracking-wider hover:bg-cyan-acc/10 transition-all"
+      >
+        <span class="text-cyan-acc">&gt;</span>
+        OPEN_TRANSMISSION
+        <span class="text-text-muted">→</span>
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+      <span class="font-mono text-xs text-text-muted tracking-widest">SCROLL</span>
+      <div class="w-px h-12 bg-gradient-to-b from-border-dark to-transparent"></div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       ACTIVE DEPLOYMENTS & PROJECTS
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="projects" class="px-6 md:px-16 lg:px-24 py-24">
+
+    <div class="mb-12 fade-in-up">
+      <p class="section-label mb-2">// SECTION_02</p>
+      <h2 class="font-mono text-2xl md:text-3xl text-text-primary font-semibold">
+        ACTIVE_DEPLOYMENTS
+        <span class="text-border-dark">&amp;</span>
+        PROJECTS
+      </h2>
+      <div class="mt-3 w-20 h-px bg-gradient-to-r from-emerald-acc to-transparent"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- ── Project 1: ESP32-S3 / SK6812 ────────────────────────── -->
+      <div class="project-card terminal-card p-6 fade-in-up" style="transition-delay:0.05s">
+        <!-- Header row -->
+        <div class="flex items-center justify-between mb-5">
+          <span class="tag-badge border-emerald-acc/60 text-emerald-lit bg-emerald-acc/5 flex items-center gap-1.5">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-lit animate-pulse"></span>
+            DEPLOYED
+          </span>
+          <div class="w-9 h-9 rounded border border-border-dark flex items-center justify-center text-emerald-acc bg-card-surface">
+            <i data-lucide="cpu" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <!-- Title -->
+        <h3 class="font-mono text-base font-semibold text-text-primary mb-2 leading-snug">
+          ESP32-S3 / SK6812 Custom WLED<br/>Gradient Controllers
+        </h3>
+        <p class="font-sans text-sm text-text-soft mb-4 leading-relaxed">
+          Custom addressable LED controllers with audio-reactive FFT pipeline, OTA firmware updates, and BLE + WiFi dual-mode configuration.
+        </p>
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span class="tag-badge border-border-mid text-text-muted">ESP32-S3</span>
+          <span class="tag-badge border-border-mid text-text-muted">C++</span>
+          <span class="tag-badge border-border-mid text-text-muted">WLED</span>
+          <span class="tag-badge border-border-mid text-text-muted">SK6812</span>
+          <span class="tag-badge border-border-mid text-text-muted">PWM</span>
+          <span class="tag-badge border-border-mid text-text-muted">Audio-Reactive</span>
+        </div>
+        <!-- Expand Button -->
+        <button
+          onclick="toggleDrawer('drawer-esp32')"
+          class="w-full flex items-center justify-between px-4 py-2 rounded border border-border-dark text-emerald-acc font-mono text-xs tracking-wider hover:border-emerald-acc/60 hover:bg-emerald-acc/5 transition-all group"
+        >
+          <span><span class="text-text-muted">▶</span> VIEW_ARCHITECTURE</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-[.active-btn]:rotate-180" id="icon-esp32"></i>
+        </button>
+        <!-- Drawer -->
+        <div class="drawer-content" id="drawer-esp32">
+          <div class="mt-4 bg-bg-primary rounded border border-border-dark p-4">
+            <p class="font-mono text-xs text-text-muted mb-3 tracking-widest">// ARCHITECTURE_NOTES</p>
+            <ul class="space-y-2">
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Multi-zone addressable LED architecture with per-segment palette mapping</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Custom aluminum extrusion channel integration for thermal management</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Audio-reactive FFT analysis pipeline for real-time gradient modulation</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>BLE + WiFi dual-mode configuration interface</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>WLED JSON API integration for home automation hooks</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Custom bootloader config with OTA firmware update pipeline</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Project 2: CSR8670 BLE Reverse Engineering ──────────── -->
+      <div class="project-card terminal-card p-6 fade-in-up" style="transition-delay:0.1s">
+        <div class="flex items-center justify-between mb-5">
+          <span class="tag-badge border-amber-acc/60 text-amber-lit bg-amber-acc/5 flex items-center gap-1.5">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-lit animate-pulse"></span>
+            ACTIVE R&amp;D
+          </span>
+          <div class="w-9 h-9 rounded border border-border-dark flex items-center justify-center text-cyan-acc bg-card-surface">
+            <i data-lucide="bluetooth" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <h3 class="font-mono text-base font-semibold text-text-primary mb-2 leading-snug">
+          Qualcomm CSR8670 &amp; BLE Protocol<br/>Reverse-Engineering
+        </h3>
+        <p class="font-sans text-sm text-text-soft mb-4 leading-relaxed">
+          Deep BLE GATT protocol analysis using HCI sniffing and Wireshark to reverse-engineer proprietary speaker firmware behaviors.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span class="tag-badge border-border-mid text-text-muted">BLE GATT</span>
+          <span class="tag-badge border-border-mid text-text-muted">CSR8670</span>
+          <span class="tag-badge border-border-mid text-text-muted">Wireshark</span>
+          <span class="tag-badge border-border-mid text-text-muted">Python</span>
+          <span class="tag-badge border-border-mid text-text-muted">HCI</span>
+          <span class="tag-badge border-border-mid text-text-muted">Reverse Eng.</span>
+        </div>
+        <button
+          onclick="toggleDrawer('drawer-csr')"
+          class="w-full flex items-center justify-between px-4 py-2 rounded border border-border-dark text-amber-acc font-mono text-xs tracking-wider hover:border-amber-acc/60 hover:bg-amber-acc/5 transition-all group"
+        >
+          <span><span class="text-text-muted">▶</span> VIEW_ARCHITECTURE</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="icon-csr"></i>
+        </button>
+        <div class="drawer-content" id="drawer-csr">
+          <div class="mt-4 bg-bg-primary rounded border border-border-dark p-4">
+            <p class="font-mono text-xs text-text-muted mb-3 tracking-widest">// ARCHITECTURE_NOTES</p>
+            <ul class="space-y-2">
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-amber-acc shrink-0">→</span>BLE GATT characteristic enumeration via HCI sniffing</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-amber-acc shrink-0">→</span>Custom auto-standby override daemon (prevents deep sleep on 15min timeout)</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-amber-acc shrink-0">→</span>Wireshark + btsnoop_hci log capture pipeline for protocol analysis</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-amber-acc shrink-0">→</span>Reverse-engineered proprietary GATT service UUIDs for speaker control</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-amber-acc shrink-0">→</span>Python BLE controller daemon using Bleak library</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-amber-acc shrink-0">→</span>Host-side integration for seamless OS audio routing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Project 3: Self-Hosted Infrastructure ───────────────── -->
+      <div class="project-card terminal-card p-6 fade-in-up" style="transition-delay:0.15s">
+        <div class="flex items-center justify-between mb-5">
+          <span class="tag-badge border-emerald-acc/60 text-emerald-lit bg-emerald-acc/5 flex items-center gap-1.5">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-lit animate-pulse"></span>
+            OPERATIONAL
+          </span>
+          <div class="w-9 h-9 rounded border border-border-dark flex items-center justify-center text-emerald-acc bg-card-surface">
+            <i data-lucide="server" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <h3 class="font-mono text-base font-semibold text-text-primary mb-2 leading-snug">
+          Self-Hosted Infrastructure<br/>&amp; Storage Clusters
+        </h3>
+        <p class="font-sans text-sm text-text-soft mb-4 leading-relaxed">
+          Bare-metal NAS and Proxmox hypervisor stack with ZFS RAIDZ2, Docker Compose orchestration, and full media server deployment.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span class="tag-badge border-border-mid text-text-muted">TrueNAS</span>
+          <span class="tag-badge border-border-mid text-text-muted">Proxmox</span>
+          <span class="tag-badge border-border-mid text-text-muted">Docker</span>
+          <span class="tag-badge border-border-mid text-text-muted">ZFS</span>
+          <span class="tag-badge border-border-mid text-text-muted">Plex</span>
+          <span class="tag-badge border-border-mid text-text-muted">Jellyfin</span>
+          <span class="tag-badge border-border-mid text-text-muted">SMB</span>
+        </div>
+        <button
+          onclick="toggleDrawer('drawer-infra')"
+          class="w-full flex items-center justify-between px-4 py-2 rounded border border-border-dark text-emerald-acc font-mono text-xs tracking-wider hover:border-emerald-acc/60 hover:bg-emerald-acc/5 transition-all group"
+        >
+          <span><span class="text-text-muted">▶</span> VIEW_ARCHITECTURE</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="icon-infra"></i>
+        </button>
+        <div class="drawer-content" id="drawer-infra">
+          <div class="mt-4 bg-bg-primary rounded border border-border-dark p-4">
+            <p class="font-mono text-xs text-text-muted mb-3 tracking-widest">// ARCHITECTURE_NOTES</p>
+            <ul class="space-y-2">
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Bare-metal NAS deployment with ZFS RAIDZ2 for fault-tolerant storage</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Proxmox VE hypervisor managing containerized and VM workloads</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Plex &amp; Jellyfin parallel media server deployment with hardware transcoding</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Docker Compose orchestration for service stack management</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Local DNS + reverse proxy (Nginx Proxy Manager) for internal routing</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-emerald-acc shrink-0">→</span>Scheduled rsync + snapshot backup strategy with offsite replication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Project 4: Community Automation ────────────────────── -->
+      <div class="project-card terminal-card p-6 fade-in-up" style="transition-delay:0.2s">
+        <div class="flex items-center justify-between mb-5">
+          <span class="tag-badge border-cyan-acc/60 text-cyan-lit bg-cyan-acc/5 flex items-center gap-1.5">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-cyan-lit animate-pulse"></span>
+            ACTIVE
+          </span>
+          <div class="w-9 h-9 rounded border border-border-dark flex items-center justify-center text-cyan-acc bg-card-surface">
+            <i data-lucide="terminal" class="w-5 h-5"></i>
+          </div>
+        </div>
+        <h3 class="font-mono text-base font-semibold text-text-primary mb-2 leading-snug">
+          System Operations &amp;<br/>Community Automation
+        </h3>
+        <p class="font-sans text-sm text-text-soft mb-4 leading-relaxed">
+          High-volume subreddit AutoModerator engineering, Reddit API automation pipelines, and hardware health monitoring scripts.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span class="tag-badge border-border-mid text-text-muted">AutoModerator</span>
+          <span class="tag-badge border-border-mid text-text-muted">Python</span>
+          <span class="tag-badge border-border-mid text-text-muted">Bash</span>
+          <span class="tag-badge border-border-mid text-text-muted">Cron</span>
+          <span class="tag-badge border-border-mid text-text-muted">Reddit API</span>
+          <span class="tag-badge border-border-mid text-text-muted">Monitoring</span>
+        </div>
+        <button
+          onclick="toggleDrawer('drawer-ops')"
+          class="w-full flex items-center justify-between px-4 py-2 rounded border border-border-dark text-cyan-acc font-mono text-xs tracking-wider hover:border-cyan-acc/60 hover:bg-cyan-acc/5 transition-all group"
+        >
+          <span><span class="text-text-muted">▶</span> VIEW_ARCHITECTURE</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="icon-ops"></i>
+        </button>
+        <div class="drawer-content" id="drawer-ops">
+          <div class="mt-4 bg-bg-primary rounded border border-border-dark p-4">
+            <p class="font-mono text-xs text-text-muted mb-3 tracking-widest">// ARCHITECTURE_NOTES</p>
+            <ul class="space-y-2">
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-cyan-acc shrink-0">→</span>High-volume AutoModerator YAML rule engineering for large subreddit governance</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-cyan-acc shrink-0">→</span>Reddit API integration for automated flair, removal, and report workflows</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-cyan-acc shrink-0">→</span>Bash + cron-scheduled monitoring scripts for hardware health diagnostics</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-cyan-acc shrink-0">→</span>Custom alerting pipeline for system anomaly detection</li>
+              <li class="font-mono text-xs text-text-soft flex gap-2"><span class="text-cyan-acc shrink-0">→</span>Operational runbooks and SOP documentation for infrastructure maintenance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HARDWARE LAB & SYSTEMS MATRIX
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="lab" class="px-6 md:px-16 lg:px-24 py-24 border-t border-border-dark/50">
+
+    <div class="mb-12 fade-in-up">
+      <p class="section-label mb-2">// SECTION_03</p>
+      <h2 class="font-mono text-2xl md:text-3xl text-text-primary font-semibold">
+        HARDWARE_LAB <span class="text-border-dark">&amp;</span> SYSTEMS_MATRIX
+      </h2>
+      <div class="mt-3 w-20 h-px bg-gradient-to-r from-cyan-acc to-transparent"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Left: Workbench & Tooling -->
+      <div class="terminal-card p-6 fade-in-up border-l-4 border-l-cyan-acc" style="transition-delay:0.05s">
+        <div class="flex items-center gap-3 mb-5">
+          <i data-lucide="wrench" class="w-5 h-5 text-cyan-acc shrink-0"></i>
+          <span class="font-mono text-sm font-semibold text-text-primary tracking-wider">WORKBENCH_INVENTORY</span>
+        </div>
+        <div class="w-full border-b border-border-dark mb-4"></div>
+
+        <div class="workbench-row">
+          <span class="text-cyan-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Firmware Flashing</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">UART / USB-C DFU / OTA</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-cyan-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Protocol Analysis</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">I2C / SPI / UART logic analyzers</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-cyan-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">RF &amp; BLE Analysis</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">HCI sniffing, spectrum observation</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-cyan-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">PCB &amp; Micro-Soldering</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">SMD rework, thermal reflow</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-cyan-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Board Diagnostics</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">multimeter, oscilloscope, bench PSU</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-cyan-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Custom Enclosures</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">aluminum extrusions, 3D-printed brackets</span>
+        </div>
+      </div>
+
+      <!-- Right: Infrastructure Stack -->
+      <div class="terminal-card p-6 fade-in-up border-l-4 border-l-emerald-acc" style="transition-delay:0.1s">
+        <div class="flex items-center gap-3 mb-5">
+          <i data-lucide="layers" class="w-5 h-5 text-emerald-acc shrink-0"></i>
+          <span class="font-mono text-sm font-semibold text-text-primary tracking-wider">INFRA_MANIFEST</span>
+        </div>
+        <div class="w-full border-b border-border-dark mb-4"></div>
+
+        <div class="workbench-row">
+          <span class="text-emerald-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Hypervisor</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">Proxmox VE</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-emerald-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Storage OS</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">TrueNAS SCALE (ZFS)</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-emerald-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Containerization</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">Docker / Compose</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-emerald-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Networking</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">Custom DNS, VLANs, reverse proxy</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-emerald-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">Media Stack</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">Plex, Jellyfin, *arr suite</span>
+        </div>
+        <div class="workbench-row">
+          <span class="text-emerald-acc shrink-0">■</span>
+          <span class="text-text-soft w-36 shrink-0">OS Environments</span>
+          <span class="text-border-dark shrink-0">→</span>
+          <span class="text-text-mono">Linux (Debian/Ubuntu), Windows Server</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CONTACT & TRANSMISSION CONSOLE
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="contact" class="px-6 md:px-16 lg:px-24 py-24 border-t border-border-dark/50">
+
+    <div class="mb-12 fade-in-up">
+      <p class="section-label mb-2">// SECTION_04</p>
+      <h2 class="font-mono text-2xl md:text-3xl text-text-primary font-semibold">
+        TRANSMISSION_CONSOLE
+      </h2>
+      <div class="mt-3 w-20 h-px bg-gradient-to-r from-amber-acc to-transparent"></div>
+    </div>
+
+    <div class="max-w-3xl fade-in-up" style="transition-delay:0.05s">
+      <div class="terminal-card p-6 md:p-8">
+
+        <!-- Terminal title bar -->
+        <div class="flex items-center gap-2 mb-6 pb-4 border-b border-border-dark">
+          <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+          <span class="w-3 h-3 rounded-full bg-amber-acc/70"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-acc/70"></span>
+          <span class="ml-4 font-mono text-xs text-text-muted tracking-widest">transmission_console.sh</span>
+        </div>
+
+        <!-- Double line separator -->
+        <div class="font-mono text-xs text-text-muted mb-6">
+          <span class="text-text-soft tracking-widest">════════════════════════════════════════</span>
+        </div>
+
+        <!-- Email row -->
+        <div class="mb-6">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+            <span class="font-mono text-xs text-text-muted w-28 shrink-0">CHANNEL</span>
+            <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
+            <span class="font-mono text-xs text-text-soft">EMAIL</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-2">
+            <span class="font-mono text-xs text-text-muted w-28 shrink-0">ADDRESS</span>
+            <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
+            <span class="font-mono text-xs text-cyan-lit" id="email-addr">harsh@example.com</span>
+            <button
+              onclick="copyEmail()"
+              class="sm:ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-cyan-acc/60 hover:text-cyan-lit transition-all group"
+              title="Copy email"
+            >
+              <i data-lucide="clipboard-copy" class="w-3.5 h-3.5"></i>
+              COPY
+            </button>
+          </div>
+        </div>
+
+        <div class="border-b border-border-dark/60 mb-6"></div>
+
+        <!-- External Links -->
+        <div>
+          <p class="font-mono text-xs text-text-muted tracking-widest mb-4">EXTERNAL_LINKS:</p>
+
+          <div class="space-y-3">
+            <!-- GitHub -->
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-text-muted shrink-0 w-4">→</span>
+              <span class="font-mono text-xs text-text-soft">github.com/harshvardhan</span>
+              <a
+                href="https://github.com/harshvardhan"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-emerald-acc/60 hover:text-emerald-lit transition-all"
+              >
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                LINK_OUT ↗
+              </a>
+            </div>
+
+            <!-- Resume -->
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-text-muted shrink-0 w-4">→</span>
+              <span class="font-mono text-xs text-text-soft">Resume / CV</span>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-amber-acc/60 hover:text-amber-lit transition-all"
+              >
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                DOWNLOAD ↗
+              </a>
+            </div>
+
+            <!-- PGP Key -->
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-text-muted shrink-0 w-4">→</span>
+              <span class="font-mono text-xs text-text-soft">PGP Public Key</span>
+              <button
+                onclick="copyPGP()"
+                class="ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-cyan-acc/60 hover:text-cyan-lit transition-all"
+              >
+                <i data-lucide="key" class="w-3.5 h-3.5"></i>
+                COPY_KEY ↗
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Closing prompt -->
+        <div class="mt-8 pt-4 border-t border-border-dark">
+          <span class="font-mono text-xs text-text-muted">harsh@localhost:~$</span>
+          <span class="font-mono text-xs text-text-mono animate-pulse ml-2">▮</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════ -->
+  <footer class="px-6 md:px-16 lg:px-24 py-12 border-t border-border-dark/50">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <div class="text-center md:text-left">
+        <p class="font-mono text-xs text-text-muted tracking-wider">
+          SYSTEM_BUILD :: <span class="text-text-soft">v1.0.0</span>
+          <span class="mx-2 text-border-dark">//</span>
+          <span class="text-text-soft">2026</span>
+        </p>
+        <p class="font-mono text-xs text-text-muted tracking-wider mt-1">
+          CRAFTED_BY :: <span class="text-text-primary">HARSH VARDHAN</span>
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span class="pulse-dot"></span>
+        <span class="font-mono text-xs text-emerald-lit tracking-widest">ALL_SYSTEMS_NOMINAL</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       JAVASCRIPT
+       ═══════════════════════════════════════════════════════════════ -->
+  <script>
+    // ── Initialize Lucide Icons ──────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      lucide.createIcons();
+    });
+
+    // ── Uptime Counter ───────────────────────────────────────────────
+    const startTime = Date.now();
+    function updateUptime() {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+      const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+      const s = String(elapsed % 60).padStart(2, '0');
+      const el = document.getElementById('uptime-display');
+      if (el) el.textContent = `${h}:${m}:${s}`;
+    }
+    updateUptime();
+    setInterval(updateUptime, 1000);
+
+    // ── Expandable Drawers ───────────────────────────────────────────
+    function toggleDrawer(drawerId) {
+      const drawer = document.getElementById(drawerId);
+      if (!drawer) return;
+      const isOpen = drawer.classList.contains('open');
+      drawer.classList.toggle('open', !isOpen);
+
+      // Rotate chevron icon
+      const iconMap = {
+        'drawer-esp32': 'icon-esp32',
+        'drawer-csr':   'icon-csr',
+        'drawer-infra': 'icon-infra',
+        'drawer-ops':   'icon-ops',
+      };
+      const iconEl = document.getElementById(iconMap[drawerId]);
+      if (iconEl) {
+        iconEl.style.transform = isOpen ? '' : 'rotate(180deg)';
+        iconEl.style.transition = 'transform 0.3s ease';
+      }
+    }
+
+    // ── Toast Notification ───────────────────────────────────────────
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        ${message}
+      `;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('hiding');
+        setTimeout(() => {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 300);
+      }, 2500);
+    }
+
+    // ── Copy Email ───────────────────────────────────────────────────
+    function copyEmail() {
+      const email = document.getElementById('email-addr')?.textContent?.trim() || 'harsh@example.com';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email)
+          .then(() => showToast('EMAIL_COPIED // TRANSMISSION READY'))
+          .catch(() => fallbackCopy(email));
+      } else {
+        fallbackCopy(email);
+      }
+    }
+
+    // ── Copy PGP Key ─────────────────────────────────────────────────
+    function copyPGP() {
+      const pgpKey = '-----BEGIN PGP PUBLIC KEY BLOCK-----\n[PGP Key Placeholder]\n-----END PGP PUBLIC KEY BLOCK-----';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pgpKey)
+          .then(() => showToast('PGP_KEY_COPIED // SECURE CHANNEL READY'))
+          .catch(() => fallbackCopy(pgpKey));
+      } else {
+        fallbackCopy(pgpKey);
+      }
+    }
+
+    // ── Fallback clipboard copy ──────────────────────────────────────
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('COPIED // TRANSMISSION READY');
+      } catch (e) {
+        showToast('COPY_FAILED // USE MANUAL SELECT');
+      }
+      document.body.removeChild(ta);
+    }
+
+    // ── IntersectionObserver Scroll Animations ───────────────────────
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+  </script>
+
 </body>
 </html>
