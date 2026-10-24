@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth overflow-x-hidden">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harsh — Hardware, Embedded & Operations Engineer</title>
+  <title>Harsh Bansal — Hardware, Embedded & Operations Engineer</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -251,10 +251,97 @@
       border-bottom: 1px solid #1E2D3D;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
+      min-width: 0;
     }
     .workbench-row:last-child {
       border-bottom: none;
     }
+    .workbench-row span:last-child {
+      min-width: 0;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* ── Mobile overflow guards ──────────────────────────────────── */
+    * { box-sizing: border-box; }
+    img, svg, table { max-width: 100%; }
+
+    /* ── Privacy Policy Modal ────────────────────────────────────── */
+    #privacy-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99990;
+      background: rgba(11,15,23,0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    #privacy-modal.open {
+      display: flex;
+    }
+    #privacy-modal-box {
+      background: #0D1117;
+      border: 1px solid #1E2D3D;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'JetBrains Mono', monospace;
+      overflow: hidden;
+    }
+    #privacy-modal-body {
+      overflow-y: auto;
+      padding: 24px 28px;
+      scrollbar-width: thin;
+      scrollbar-color: #1E2D3D #0D1117;
+    }
+    .privacy-h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: #06B6D4;
+      text-transform: uppercase;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    .privacy-h2:first-child { margin-top: 0; }
+    .privacy-p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #94A3B8;
+      line-height: 1.75;
+      margin-bottom: 8px;
+    }
+    .privacy-ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 8px 0;
+    }
+    .privacy-ul li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #94A3B8;
+      line-height: 1.75;
+      padding-left: 16px;
+      position: relative;
+    }
+    .privacy-ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #06B6D4;
+    }
+    .privacy-link {
+      color: #22D3EE;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .privacy-link:hover { color: #67E8F9; }
   </style>
 </head>
 
@@ -282,10 +369,10 @@
     <div class="mb-4 fade-in-up" style="transition-delay:0.1s">
       <h1
         class="glitch-text font-mono font-bold text-text-primary leading-none tracking-tight"
-        data-text="HARSH"
+        data-text="Harsh Bansal"
         style="font-size: clamp(2.5rem, 8vw, 6rem);"
       >
-        HARSH
+        Harsh Bansal
       </h1>
     </div>
 
@@ -298,13 +385,13 @@
 
     <!-- Telemetry Bar -->
     <div class="mb-12 fade-in-up" style="transition-delay:0.3s">
-      <div class="terminal-card max-w-2xl border-l-4 border-l-cyan-acc p-5 md:p-6">
+      <div class="terminal-card max-w-2xl border-l-4 border-l-cyan-acc p-5 md:p-6 overflow-hidden">
         <div class="grid grid-cols-1 gap-3">
           <!-- Row -->
           <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
             <span class="font-mono text-xs text-text-muted w-32 shrink-0">TARGET_STACK</span>
             <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
-            <span class="font-mono text-xs text-text-mono">ESP32-S3 / C++ / BLE / Linux / Homelab</span>
+            <span class="font-mono text-xs text-text-mono break-all">ESP32-S3 / C++ / BLE / Linux / Homelab</span>
           </div>
           <div class="border-b border-border-dark/50"></div>
           <!-- Row -->
@@ -720,7 +807,7 @@
           <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-2">
             <span class="font-mono text-xs text-text-muted w-28 shrink-0">ADDRESS</span>
             <span class="font-mono text-xs text-text-muted hidden sm:block">::</span>
-            <span class="font-mono text-xs text-cyan-lit" id="email-addr">harshbansal8520@gmail.com</span>
+            <span class="font-mono text-xs text-cyan-lit" id="email-addr">harshbansal8520@proton.me</span>
             <button
               onclick="copyEmail()"
               class="sm:ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-cyan-acc/60 hover:text-cyan-lit transition-all group"
@@ -740,14 +827,14 @@
 
           <div class="space-y-3">
             <!-- GitHub -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <span class="font-mono text-xs text-text-muted shrink-0 w-4">→</span>
-              <span class="font-mono text-xs text-text-soft">github.com/harsh</span>
+              <span class="font-mono text-xs text-text-soft min-w-0 truncate">github.com/harshbansal</span>
               <a
-                href="https://github.com/harsh"
+                href="https://github.com/harshbansal"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-emerald-acc/60 hover:text-emerald-lit transition-all"
+                class="ml-auto shrink-0 flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-emerald-acc/60 hover:text-emerald-lit transition-all"
               >
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                 LINK_OUT ↗
@@ -755,14 +842,14 @@
             </div>
 
             <!-- Resume -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <span class="font-mono text-xs text-text-muted shrink-0 w-4">→</span>
-              <span class="font-mono text-xs text-text-soft">Resume / CV</span>
+              <span class="font-mono text-xs text-text-soft min-w-0">Resume / CV</span>
               <a
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-amber-acc/60 hover:text-amber-lit transition-all"
+                class="ml-auto shrink-0 flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-amber-acc/60 hover:text-amber-lit transition-all"
               >
                 <i data-lucide="download" class="w-3.5 h-3.5"></i>
                 DOWNLOAD ↗
@@ -770,12 +857,12 @@
             </div>
 
             <!-- PGP Key -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <span class="font-mono text-xs text-text-muted shrink-0 w-4">→</span>
-              <span class="font-mono text-xs text-text-soft">PGP Public Key</span>
+              <span class="font-mono text-xs text-text-soft min-w-0">PGP Public Key</span>
               <button
                 onclick="copyPGP()"
-                class="ml-auto flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-cyan-acc/60 hover:text-cyan-lit transition-all"
+                class="ml-auto shrink-0 flex items-center gap-2 px-3 py-1.5 rounded border border-border-dark text-text-muted font-mono text-xs hover:border-cyan-acc/60 hover:text-cyan-lit transition-all"
               >
                 <i data-lucide="key" class="w-3.5 h-3.5"></i>
                 COPY_KEY ↗
@@ -807,7 +894,7 @@
           <span class="text-text-soft">2026</span>
         </p>
         <p class="font-mono text-xs text-text-muted tracking-wider mt-1">
-          CRAFTED_BY :: <span class="text-text-primary">HARSH</span>
+          CRAFTED_BY :: <span class="text-text-primary">Harsh Bansal</span>
         </p>
       </div>
 
@@ -815,6 +902,13 @@
         <span class="pulse-dot"></span>
         <span class="font-mono text-xs text-emerald-lit tracking-widest">ALL_SYSTEMS_NOMINAL</span>
       </div>
+
+      <button
+        onclick="openPrivacy()"
+        class="font-mono text-xs text-text-muted hover:text-cyan-lit transition-colors tracking-wider underline underline-offset-4 decoration-border-dark hover:decoration-cyan-acc/60"
+      >
+        PRIVACY_POLICY
+      </button>
 
     </div>
   </footer>
@@ -882,7 +976,7 @@
 
     // ── Copy Email ───────────────────────────────────────────────────
     function copyEmail() {
-      const email = document.getElementById('email-addr')?.textContent?.trim() || 'harshbansal8520@gmail.com';
+      const email = document.getElementById('email-addr')?.textContent?.trim() || 'harshbansal8520@proton.me';
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(email)
           .then(() => showToast('EMAIL_COPIED // TRANSMISSION READY'))
@@ -935,7 +1029,120 @@
     );
 
     document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
+    // ── Privacy Policy Modal ─────────────────────────────────────────
+    function openPrivacy() {
+      const modal = document.getElementById('privacy-modal');
+      if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closePrivacy() {
+      const modal = document.getElementById('privacy-modal');
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+    function closePrivacyIfBackdrop(e) {
+      if (e.target === document.getElementById('privacy-modal')) closePrivacy();
+    }
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePrivacy();
+    });
   </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PRIVACY POLICY MODAL
+       ═══════════════════════════════════════════════════════════════ -->
+  <div id="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title" onclick="closePrivacyIfBackdrop(event)">
+    <div id="privacy-modal-box">
+
+      <!-- Title bar -->
+      <div class="flex items-center gap-2 px-6 py-4 border-b border-border-dark shrink-0">
+        <span class="w-3 h-3 rounded-full bg-red-500/70 cursor-pointer" onclick="closePrivacy()" title="Close"></span>
+        <span class="w-3 h-3 rounded-full bg-amber-acc/70"></span>
+        <span class="w-3 h-3 rounded-full bg-emerald-acc/70"></span>
+        <span class="ml-4 font-mono text-xs text-text-muted tracking-widest flex-1" id="privacy-modal-title">privacy_policy.md</span>
+        <button onclick="closePrivacy()" class="font-mono text-xs text-text-muted hover:text-text-primary transition-colors px-2 py-1 rounded hover:bg-card-surface" aria-label="Close privacy policy">
+          ESC
+        </button>
+      </div>
+
+      <!-- Effective date bar -->
+      <div class="px-7 py-3 border-b border-border-dark/60 shrink-0 flex items-center gap-3">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-lit"></span>
+        <span class="font-mono text-xs text-text-muted">EFFECTIVE_DATE :: <span class="text-emerald-lit">2026-10-25</span></span>
+        <span class="ml-auto font-mono text-xs text-text-muted">PUBLISHER :: <span class="text-text-soft">Panda apps</span></span>
+      </div>
+
+      <!-- Body -->
+      <div id="privacy-modal-body">
+
+        <p class="privacy-h2">// OVERVIEW</p>
+        <p class="privacy-p">
+          None of our apps collect, store, or share your personal information, and none of them ask you to create an account or sign up.
+        </p>
+        <p class="privacy-p">
+          This Privacy Policy applies to every app published on Google Play by Panda apps ("we", "us", "our"), including any apps we release in the future. It is effective as of October 25, 2026.
+        </p>
+
+        <div class="border-b border-border-dark/40 my-5"></div>
+
+        <p class="privacy-h2">// INFORMATION_WE_COLLECT</p>
+        <p class="privacy-p">We do not collect personal data that identifies you. Specifically:</p>
+        <ul class="privacy-ul mb-4">
+          <li>No account, sign-up, or login is required to use any of our apps.</li>
+          <li>We do not collect your name, email address, phone number, location, contacts, or photos.</li>
+          <li>We do not use advertising or cross-app tracking tools.</li>
+          <li>We do not show advertisements.</li>
+          <li>We do not sell or rent any information, and we share it only with the service providers described below.</li>
+        </ul>
+        <p class="privacy-p">
+          To keep our apps stable and improve them, we may use crash reporting and analytics services. These collect anonymous technical information, such as crash logs, device model, operating system version, app version, and general usage like which features are used. This data does not identify you personally and is used only to fix bugs and improve our apps. These providers handle the data under their own privacy policies.
+        </p>
+        <p class="privacy-p">
+          Any settings or content you create in an app are stored only on your own device. They are never sent to us or to any server, and they are removed when you uninstall the app.
+        </p>
+
+        <div class="border-b border-border-dark/40 my-5"></div>
+
+        <p class="privacy-h2">// PERMISSIONS_AND_THIRD_PARTY_SERVICES</p>
+        <p class="privacy-p">
+          Our apps do not request access to your contacts, location, camera, microphone, or personal files. They contain no third-party advertising software. Any crash reporting or analytics services we use are described above.
+        </p>
+        <p class="privacy-p">
+          Google Play, which you use to download our apps, may collect its own information under
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="privacy-link">Google's Privacy Policy</a>.
+          We do not control or receive that information.
+        </p>
+
+        <div class="border-b border-border-dark/40 my-5"></div>
+
+        <p class="privacy-h2">// CHANGES_TO_THIS_POLICY</p>
+        <p class="privacy-p">
+          If we change how our apps handle data, for example by adding a feature that needs it, we will update this page and change the effective date above before the change reaches you.
+        </p>
+
+        <div class="border-b border-border-dark/40 my-5"></div>
+
+        <p class="privacy-h2">// CONTACT</p>
+        <p class="privacy-p">
+          Questions about this policy can be sent to
+          <a href="mailto:harshbansal8520@proton.me" class="privacy-link">harshbansal8520@proton.me</a>
+        </p>
+
+        <!-- Terminal closing line -->
+        <div class="mt-8 pt-4 border-t border-border-dark/60">
+          <span class="font-mono text-xs text-text-muted">pandaapps@policy:~$</span>
+          <span class="font-mono text-xs text-text-mono animate-pulse ml-2">▮</span>
+        </div>
+
+      </div><!-- /body -->
+    </div><!-- /modal-box -->
+  </div><!-- /privacy-modal -->
 
 </body>
 </html>
