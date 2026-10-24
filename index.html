@@ -357,11 +357,11 @@
 
     <!-- Top status bar -->
     <div class="mb-10 fade-in-up" style="transition-delay:0s">
-      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-emerald-acc/30 bg-card-dark/80 backdrop-blur-sm">
-        <span class="pulse-dot"></span>
-        <span class="font-mono text-xs text-emerald-lit tracking-widest">ALL_SYSTEMS_OPERATIONAL</span>
-        <span class="text-border-dark font-mono text-xs">//</span>
-        <span class="font-mono text-xs text-text-muted tracking-widest">READY_FOR_DEPLOYMENT</span>
+      <div class="inline-flex flex-wrap items-center gap-3 px-4 py-2 rounded-full border border-emerald-acc/30 bg-card-dark/80 backdrop-blur-sm max-w-full">
+        <span class="pulse-dot shrink-0"></span>
+        <span class="font-mono text-xs text-emerald-lit tracking-widest whitespace-nowrap">ALL_SYSTEMS_OPERATIONAL</span>
+        <span class="text-border-dark font-mono text-xs shrink-0">//</span>
+        <span class="font-mono text-xs text-text-muted tracking-widest whitespace-nowrap">READY_FOR_DEPLOYMENT</span>
       </div>
     </div>
 
@@ -793,9 +793,7 @@
         </div>
 
         <!-- Double line separator -->
-        <div class="font-mono text-xs text-text-muted mb-6">
-          <span class="text-text-soft tracking-widest">════════════════════════════════════════</span>
-        </div>
+        <div class="w-full border-b-2 border-border-dark mb-6" style="border-image: repeating-linear-gradient(90deg,#1E2D3D 0,#1E2D3D 6px,transparent 6px,transparent 10px) 1"></div>
 
         <!-- Email row -->
         <div class="mb-6">
