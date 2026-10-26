@@ -1034,6 +1034,8 @@
       if (modal) {
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
+        // Update URL hash without triggering a scroll
+        history.pushState(null, '', '#privacy');
       }
     }
     function closePrivacy() {
@@ -1041,6 +1043,8 @@
       if (modal) {
         modal.classList.remove('open');
         document.body.style.overflow = '';
+        // Remove hash from URL
+        history.pushState(null, '', window.location.pathname);
       }
     }
     function closePrivacyIfBackdrop(e) {
@@ -1049,6 +1053,22 @@
     // Close on Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closePrivacy();
+    });
+    // Open modal if page loads with #privacy hash
+    if (window.location.hash === '#privacy') {
+      document.addEventListener('DOMContentLoaded', openPrivacy);
+    }
+    // Handle browser back/forward navigation with hash
+    window.addEventListener('hashchange', function() {
+      if (window.location.hash === '#privacy') {
+        openPrivacy();
+      } else {
+        const modal = document.getElementById('privacy-modal');
+        if (modal && modal.classList.contains('open')) {
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      }
     });
   </script>
 
@@ -1099,7 +1119,7 @@
           <li>We do not sell or rent any information, and we share it only with the service providers described below.</li>
         </ul>
         <p class="privacy-p">
-          To keep our apps stable and improve them, we may use crash reporting and analytics services. These collect anonymous technical information, such as crash logs, device model, operating system version, app version, and general usage like which features are used. This data does not identify you personally and is used only to fix bugs and improve our apps. These providers handle the data under their own privacy policies.
+          To keep our apps stable and improve them, we may use crash reporting and analytics services (Google Firebase Analytics and Firebase Crashlytics, both provided by Google). These collect anonymous technical information, such as crash logs, device model, operating system version, app version, a randomly generated app instance identifier, and general usage like which features are used. This data does not identify you personally and is used only to fix bugs and improve our apps. Google processes this data under its own privacy policies.
         </p>
         <p class="privacy-p">
           Any settings or content you create in an app are stored only on your own device. They are never sent to us or to any server, and they are removed when you uninstall the app.
@@ -1115,6 +1135,10 @@
           Google Play, which you use to download our apps, may collect its own information under
           <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="privacy-link">Google's Privacy Policy</a>.
           We do not control or receive that information.
+        </p>
+        <p class="privacy-p">
+          You can read how Firebase handles data in
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer" class="privacy-link">Privacy and Security in Firebase</a>.
         </p>
 
         <div class="border-b border-border-dark/40 my-5"></div>
